@@ -1,0 +1,147 @@
+body {
+  background-color: #4e4e4e;
+  font-family: Arial, sans-serif;
+}
+
+.matrix-container {
+  max-width: 1400px;
+  margin-top: 150px;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 4px;
+}
+
+.gallery-row {
+  display: flex;
+  flex-wrap: wrap; /* Разрешаем окнам падать под линию картинок */
+  flex-direction: row; /* Элементы идут в ряд */
+}
+
+.images-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  width: 100%; /* Линия с картинками занимает всю ширину */
+  margin-bottom: 0;
+}
+
+/* Стили для обычных картинок слева */
+.static-img {
+  width: 35px;   /* Задайте нужную ширину в пикселях (например: 100px, 150px) */
+  height: auto;   /* Высота подстроится автоматически, чтобы картинка не сплющилась */
+  display: block; /* Делает элемент блочным для правильного расчета отступов */
+}
+
+
+.toggle-img {
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.toggle-img:hover {
+  transform: scale(1.05);
+  opacity: 0.85;
+}
+
+/* Двойной контур для больших картинок */
+.toggle-img.active-border {
+  border-radius: 4px;
+  box-shadow: 
+    0 0 0 1px #f7fc01, 
+    0 0 0 2px #f79400;
+}
+
+/* Выпадающие окна (теперь их много, они скрыты) */
+.row-dropdown {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  width: 100%; /* Окно займет всю ширину под картинками */
+  transition: max-height 0.4s ease-out, opacity 0.3s ease-out, margin-top 0.3s ease;
+  background-color: #f8f9fa00;
+  border-radius: 6px;
+}
+
+.row-dropdown.open {
+  max-height: 600px; /* Запас высоты увеличили, так как внутри теперь и картинки, и под-окно */
+  opacity: 1;
+  margin-top: 10px;
+  margin-bottom: 15px; /* Отступ до следующего ряда */
+}
+
+.dropdown-inner {
+  padding: 2px;
+  border: 1px solid #dddddd00;
+}
+
+/* --- ВТОРОЙ УРОВЕНЬ (МАЛЕНЬКИЕ КАРТИНКИ) --- */
+.sub-images-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;  /* расстояние между м1 м2 м3 */
+  margin-bottom: 0px; /* отступ окно от м1 м2 м3 */
+}
+
+.sub-toggle-img {
+  width: 47px;
+  height: 40px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.sub-toggle-img:hover {
+  transform: scale(1.1);
+}
+
+/* Двойной контур для маленьких картинок */
+.sub-toggle-img.active-sub-border {
+  border-radius: 4px;
+  box-shadow: 
+    0 0 0 1px #f7fc01, 
+    0 0 0 2px #f79400;
+}
+
+/* Самое нижнее текстовое поле */
+.sub-dropdown {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s ease-out, opacity 0.2s ease-out;
+  background-color: #e9ecef00;
+  border-radius: 4px;
+}
+
+.sub-dropdown.open {
+  max-height: 200px;
+  opacity: 1;
+  margin-top: 10px;
+}
+
+.sub-dropdown-inner {
+  padding: 0px;
+  color: #222;
+  font-size: 14px;
+}
+/* Финальная картинка в самом низу */
+.final-dropdown-img {
+  display: block;
+  max-width: 100%;   /* Картинка автоматически сожмется под размер окна, если она слишком большая */
+  height: auto;      /* Пропорции не исказятся */
+    /* ВЫРАВНИВАНИЕ СЛЕВА: */
+  margin-left: 0;       /* Прижимаем вплотную к левому краю окна */
+  margin-right: auto;   /* Весь свободный остаток места отдаем правой стороне */
+  
+  border-radius: 4px;   
+}
+
+/* Корректируем максимальную высоту нижнего окна, чтобы большая картинка точно поместилась */
+.sub-dropdown.open {
+  max-height: 600px; /* Увеличили с 200px до 600px под размер большой картинки */
+  opacity: 1;
+  margin-top: 10px;
+}
+

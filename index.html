@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+<div class="matrix-container">
+
+<!-- РЯД 1 -->
+<div class="gallery-row" id="row-1">
+  
+  <!-- Линия только с большими картинками -->
+  <div class="images-line">
+    <img src="img/Icon_nosilki.png" alt="Статичная 1" class="static-img">
+    
+    <!-- Большие картинки с уникальными ID -->
+    <img src="img/Icon_GromovoeSiyanie.png" alt="Громовое сияние" class="toggle-img" id="btn-grom">
+    <img src="img/Icon_1_2.png" alt="Иконка 2" class="toggle-img" id="btn-icon2">
+    <!-- Добавьте остальные большие картинки ряда, давая им id="btn-icon3", id="btn-icon4" и т.д. -->
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- 1. ПЕРСОНАЛЬНОЕ ОКНО ДЛЯ КАРТИНКИ "ГРОМОВОЕ СИЯНИЕ" -->
+  <!-- ======================================================== -->
+  <div class="row-dropdown" data-for="btn-grom">
+    <div class="dropdown-inner">
+      
+      <!-- Ряд маленьких картинок (9-11 шт) только для "Громового сияния" -->
+      <div class="sub-images-line">
+        <img src="img/Icon_M1.png" class="sub-toggle-img" data-subimg="img/info_M1.png" alt="М1">
+        <img src="img/Icon_M2.png" class="sub-toggle-img" data-subtext="Информация для 2-й маленькой картинки Громового сияния">
+        <img src="img/Icon_M3.png" class="sub-toggle-img" data-subtext="Информация для 3-й маленькой картинки Громового сияния">
+        <img src="img/Icon_A1.png" class="sub-toggle-img" data-subtext="Информация для 1-й маленькой картинки Громового сияния">
+        <img src="img/Icon_A2.png" class="sub-toggle-img" data-subtext="Информация для 2-й маленькой картинки Громового сияния">
+        <img src="img/Icon_A3.png" class="sub-toggle-img" data-subtext="Информация для 3-й маленькой картинки Громового сияния">
+        <img src="img/Icon_B1.png" class="sub-toggle-img" data-subtext="Информация для 1-й маленькой картинки Громового сияния">
+        <img src="img/Icon_B2.png" class="sub-toggle-img" data-subtext="Информация для 2-й маленькой картинки Громового сияния">
+        <img src="img/Icon_B3.png" class="sub-toggle-img" data-subtext="Информация для 3-й маленькой картинки Громового сияния">
+        <img src="img/Icon_C1.png" class="sub-toggle-img" data-subtext="Информация для 1-й маленькой картинки Громового сияния">
+        <img src="img/Icon_C2.png" class="sub-toggle-img" data-subtext="Информация для 2-й маленькой картинки Громового сияния">
+        <!-- Сюда дописываете остальные маленькие картинки до 11 штук -->
+      </div>
+
+      <!-- Текстовое окно внутри панели Громового сияния -->
+      <div class="sub-dropdown">
+      <div class="sub-dropdown-inner">
+        <!-- Сюда JavaScript будет подставлять картинку. Изначально src пустой -->
+        <img src="" alt="Финальное изображение" class="final-dropdown-img">
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- 2. ПЕРСОНАЛЬНОЕ ОКНО ДЛЯ ВТОРОЙ БОЛЬШОЙ КАРТИНКИ -->
+  <!-- ======================================================== -->
+  <div class="row-dropdown" data-for="btn-icon2">
+    <div class="dropdown-inner">
+      
+      <!-- Свой уникальный ряд маленьких картинок для второй иконки -->
+      <div class="sub-images-line">
+        <img src="img/small_any_1.png" class="sub-toggle-img" data-subtext="Совсем другой текст для второй большой картинки">
+        <img src="img/small_any_2.png" class="sub-toggle-img" data-subtext="Еще один уникальный текст...">
+      </div>
+
+      <div class="sub-dropdown">
+        <div class="sub-dropdown-inner">Нажмите на маленькую иконку выше, чтобы увидеть описание</div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+
+  <!-- РЯД 2 (9 картинок) -->
+  <div class="gallery-row" id="row-2">
+    <div class="images-line">
+      <img src="img/Icon_aptechka.png" alt="Статичная 2" class="static-img">
+      <!-- 8 кликабельных картинок -->
+      <img src="img/Icon_2_1.png" alt="Иконка" class="toggle-img" data-text="Информация для картинки 1 во втором ряду.">
+      <img src="img/Icon_2_2.png" alt="Иконка" class="toggle-img" data-text="Информация для картинки 2 во втором ряду.">
+      <img src="img/Icon_2_3.png" alt="Иконка" class="toggle-img" data-text="Информация для картинки 3 во втором ряду.">
+      <img src="img/Icon_2_4.png" alt="Иконка" class="toggle-img" data-text="Информация для картинки 4 во втором ряду.">
+      <img src="img/Icon_2_5.png" alt="Иконка" class="toggle-img" data-text="Информация для картинки 5 во втором ряду.">
+      <img src="img/Icon_2_6.png" alt="Иконка" class="toggle-img" data-text="Информация для картинки 6 во втором ряду.">
+      <img src="img/Icon_2_7.png" alt="Иконка" class="toggle-img" data-text="Информация для картинки 7 во втором ряду.">
+      <img src="img/Icon_2_8.png" alt="Иконка" class="toggle-img" data-text="Информация для картинки 8 во втором ряду.">
+    </div>
+    <!-- Выпадающая панель ряда 2 -->
+    <div class="row-dropdown">
+      <div class="dropdown-inner">Текст обновится при клике</div>
+    </div>
+  </div>
+
+  <!-- РЯД 3 (3 картинки) -->
+  <div class="gallery-row" id="row-3">
+    <div class="images-line">
+      <img src="img/Icon_static3.png" alt="Статичная 3" class="static-img">
+      <!-- 2 кликабельные картинки -->
+      <img src="img/Icon_3_1.png" alt="Иконка" class="toggle-img" data-text="Информация для картинки 1 в третьем ряду.">
+      <img src="img/Icon_3_2.png" alt="Иконка" class="toggle-img" data-text="Информация для картинки 2 в третьем ряду.">
+    </div>
+    <!-- Выпадающая панель ряда 3 -->
+    <div class="row-dropdown">
+      <div class="dropdown-inner">Текст обновится при клике</div>
+    </div>
+  </div>
+
+</div>
+
+
+<script src="app.js"></script>
+<noscript>You need to enable JavaScript to view the full site.</noscript>
+</body>
+</html>
