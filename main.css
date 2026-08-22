@@ -4,7 +4,7 @@ body {
 }
 
 .matrix-container {
-  max-width: 1400px;
+  max-width: 1700px;
   margin-top: 150px;
   margin-left: 20px;
   display: flex;
@@ -64,17 +64,12 @@ body {
   background-color: #f8f9fa00;
   border-radius: 6px;
 }
-
+/* Когда главное окно открыто, у него НЕ должно быть лимита в пикселях */
 .row-dropdown.open {
-  max-height: 600px; /* Запас высоты увеличили, так как внутри теперь и картинки, и под-окно */
+  max-height: 800px;  /* Разрешаем окну быть любой высоты без JS-вычислений */
   opacity: 1;
-  margin-top: 10px;
-  margin-bottom: 15px; /* Отступ до следующего ряда */
-}
-
-.dropdown-inner {
-  padding: 2px;
-  border: 1px solid #dddddd00;
+  margin-top: 15px;
+  margin-bottom: 15px; 
 }
 
 /* --- ВТОРОЙ УРОВЕНЬ (МАЛЕНЬКИЕ КАРТИНКИ) --- */
@@ -110,15 +105,9 @@ body {
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  transition: max-height 0.3s ease-out, opacity 0.2s ease-out;
+  transition: max-height 0.4s ease-out, opacity 0.3s ease-out;
   background-color: #e9ecef00;
   border-radius: 4px;
-}
-
-.sub-dropdown.open {
-  max-height: 200px;
-  opacity: 1;
-  margin-top: 10px;
 }
 
 .sub-dropdown-inner {
@@ -129,19 +118,36 @@ body {
 /* Финальная картинка в самом низу */
 .final-dropdown-img {
   display: block;
-  max-width: 100%;   /* Картинка автоматически сожмется под размер окна, если она слишком большая */
-  height: auto;      /* Пропорции не исказятся */
+  width: auto;       /* Картинка сохраняет свою родную ширину */
+  height: auto;      /* Картинка сохраняет свою родную высоту */
+  max-width: none;   /* ОТКЛЮЧАЕМ принудительное уменьшение под размер окна */
     /* ВЫРАВНИВАНИЕ СЛЕВА: */
   margin-left: 0;       /* Прижимаем вплотную к левому краю окна */
   margin-right: auto;   /* Весь свободный остаток места отдаем правой стороне */
-  
   border-radius: 4px;   
 }
 
-/* Корректируем максимальную высоту нижнего окна, чтобы большая картинка точно поместилась */
+/* Класс, который сделает картинку видимой после загрузки */
+.final-dropdown-img.loaded {
+  opacity: 1;
+}
+/* Самое нижнее графическое поле */
 .sub-dropdown.open {
-  max-height: 600px; /* Увеличили с 200px до 600px под размер большой картинки */
+  max-height: 800px; /* Запас под высоту вашей финальной большой картинки */
   opacity: 1;
   margin-top: 10px;
 }
 
+/* Внутренний контейнер под маленькими картинками */
+.dropdown-inner {
+  padding: 4px;
+  border: 1px solid #dddddd00;
+  overflow-x: auto; /* Если большая картинка шире экрана, внутри окна появится аккуратный нижний скролл */
+}
+
+/* Отключаем клики, наведение и делаем прозрачность 80% */
+.sub-toggle-img.semi-transparent {
+  opacity: 0.2;            /* Картинка блекнет на 80% */
+  pointer-events: none;    /* Мышка её полностью игнорирует (нельзя нажать) */
+  cursor: default;         /* Курсор не будет превращаться в палец при наведении */
+}
