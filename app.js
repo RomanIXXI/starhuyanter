@@ -25,7 +25,7 @@ toggleImages.forEach(img => {
   });
 });
 
-// === 2 УРОВЕНЬ: Логика маленьких картинок (Надежное переключение через CSS) ===
+// === 2 УРОВЕНЬ: Логика маленьких картинок (Надежное переключение с динамическим фоном) ===
 const subToggleImages = document.querySelectorAll('.sub-toggle-img');
 
 subToggleImages.forEach(subImg => {
@@ -33,30 +33,42 @@ subToggleImages.forEach(subImg => {
     const dropdownInner = this.closest('.dropdown-inner');
     const subDropdown = dropdownInner.querySelector('.sub-dropdown');
     const finalImg = subDropdown.querySelector('.final-dropdown-img');
+    const mainDropdown = this.closest('.row-dropdown');
     
     const isSubActive = this.classList.contains('active-sub-border');
 
-    // Если нажали на ту же самую маленькую иконку — закрываем её
     if (isSubActive) {
       this.classList.remove('active-sub-border');
       subDropdown.classList.remove('open');
       return;
     }
 
-    // Сбрасываем выделение с других маленьких картинок текущего окна
     dropdownInner.querySelectorAll('.sub-toggle-img').forEach(img => img.classList.remove('active-sub-border'));
-    subDropdown.classList.remove('open'); // На миг закрываем окно для мягкой смены картинки
+    subDropdown.classList.remove('open'); 
 
     this.classList.add('active-sub-border');
     const imgPath = this.getAttribute('data-subimg');
 
-    // Меняем путь к картинке без каких-либо условий и ожиданий
+    const currentBg = mainDropdown.getAttribute('data-bg');
+    if (currentBg) {
+      subDropdown.style.backgroundImage = `url('${currentBg}')`;
+    }
+
+    // ======================================================== 
+    // ТРЮК ДЛЯ ИСПРАВЛЕНИЯ ШИРИНЫ:
+    // Сбрасываем ширину окна, чтобы старый широкий фон не держал рамки
+    // ========================================================
+    subDropdown.style.width = '0px';
+
     finalImg.src = imgPath;
     
-    // Сразу же открываем окно. CSS плавно развернет его ровно до размера картинки
+    // Как только картинка подменилась, возвращаем авто-сжатие под её размер
+    subDropdown.style.width = 'max-content';
+    
     subDropdown.classList.add('open');
   });
 });
+
 
 // Ждем, пока вся страница полностью загрузится
 window.addEventListener('load', () => {

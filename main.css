@@ -9,7 +9,7 @@ body {
   margin-left: 20px;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 5px;
   padding: 4px;
 }
 
@@ -30,16 +30,38 @@ body {
 
 /* Стили для обычных картинок слева */
 .static-img {
-  width: 35px;   /* Задайте нужную ширину в пикселях (например: 100px, 150px) */
+  width: 31px;    /* Задайте нужную ширину в пикселях (например: 100px, 150px) */
   height: auto;   /* Высота подстроится автоматически, чтобы картинка не сплющилась */
-  display: block; /* Делает элемент блочным для правильного расчета отступов */
+  display: block;   /* Делает элемент блочным для правильного расчета отступов */
+  margin-bottom: 10px; /* Такой же отступ, как у toggle-img */
+  
+  /* 1. ДОБАВЛЯЕМ СКРУГЛЕНИЕ УГЛОВ */
+  border-radius: 4px; 
+  
+  /* 2. ДОБАВЛЯЕМ ТОЧНО ТАКОЙ ЖЕ КОНТУР (укажите те же цвета, что выбрали для toggle-img) */
+  box-shadow: 
+    0 0 0 1px #33333300,
+    0 0 0 2px #747474; 
 }
 
-
+/* Базовые стили для картинки-кликера */
 .toggle-img {
-  cursor: pointer;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  width: 120px; 
+  height: auto;
+  cursor: pointer; 
+  display: block;
+  margin-bottom: 10px; 
+  border-radius: 4px; /* Скругление должно быть и у обычной картинки */
+  
+  /* КОНТУР ДЛЯ ОБЫЧНОГО СОСТОЯНИЯ (замените #333 на любой нужный цвет): */
+  box-shadow: 
+    0 0 0 1px #99999900,
+    0 0 0 2px #747474; 
+
+  /* Плавная смена контуров при клике и наведении */
+  transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
 }
+
 
 .toggle-img:hover {
   transform: scale(1.05);
@@ -62,13 +84,13 @@ body {
   width: 100%; /* Окно займет всю ширину под картинками */
   transition: max-height 0.4s ease-out, opacity 0.3s ease-out, margin-top 0.3s ease;
   background-color: #f8f9fa00;
-  border-radius: 6px;
+  border-radius: 0px;
 }
 /* Когда главное окно открыто, у него НЕ должно быть лимита в пикселях */
 .row-dropdown.open {
-  max-height: 800px;  /* Разрешаем окну быть любой высоты без JS-вычислений */
+  max-height: 1000px;  /* Разрешаем окну быть любой высоты без JS-вычислений */
   opacity: 1;
-  margin-top: 15px;
+  margin-top: 5px;
   margin-bottom: 15px; 
 }
 
@@ -85,20 +107,32 @@ body {
   height: 40px;
   object-fit: cover;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  
+  /* 1. ДОБАВЛЯЕМ СКРУГЛЕНИЕ УГЛОВ */
+  border-radius: 4px; 
+  
+  /* 2. БАЗОВЫЙ КОНТУР ДЛЯ ОБЫЧНОГО СОСТОЯНИЯ (укажите те же цвета, что у больших картинок) */
+  box-shadow: 
+    0 0 0 1px #33333300,
+    0 0 0 2px #747474;
+
+  /* 3. ДОБАВЛЯЕМ box-shadow В СПИСОК ДЛЯ ПЛАВНОЙ СМЕНЫ ЦВЕТА */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .sub-toggle-img:hover {
   transform: scale(1.1);
 }
 
-/* Двойной контур для маленьких картинок */
+/* Двойной контур для маленьких картинок при выделении */
 .sub-toggle-img.active-sub-border {
   border-radius: 4px;
+  /* Этот яркий цвет плавно перекроет базовый контур при клике */
   box-shadow: 
     0 0 0 1px #f7fc01, 
     0 0 0 2px #f79400;
 }
+
 
 /* Самое нижнее текстовое поле */
 .sub-dropdown {
@@ -106,14 +140,27 @@ body {
   overflow: hidden;
   opacity: 0;
   transition: max-height 0.4s ease-out, opacity 0.3s ease-out;
-  background-color: #e9ecef00;
   border-radius: 4px;
+  /* Оставляем ТОЛЬКО настройки поведения фона (без самой картинки): */
+  background-position: left top; /* Теперь левый верхний угол фона совпадает с углом окна */
+  background-repeat: no-repeat;
+  /* ======================================================== */
+  /* ИСПРАВЛЕНИЕ: Фон сжимается ПОД РАЗМЕР ОКНА, а не наоборот */
+  /* ======================================================== */
+  background-size: auto;  
+  width: max-content;         /* Окно сжимается под контент */
+  max-width: 100%; 
 }
 
 .sub-dropdown-inner {
   padding: 0px;
   color: #222;
   font-size: 14px;
+  background-color: transparent !important;
+  border: none !important;
+  /* Заставляем внутренний блок поджиматься под размер картинки */
+  display: block;
+  width: max-content;
 }
 /* Финальная картинка в самом низу */
 .final-dropdown-img {
@@ -133,9 +180,9 @@ body {
 }
 /* Самое нижнее графическое поле */
 .sub-dropdown.open {
-  max-height: 800px; /* Запас под высоту вашей финальной большой картинки */
+  max-height: 1000px; /* Запас под высоту вашей финальной большой картинки */
   opacity: 1;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 /* Внутренний контейнер под маленькими картинками */
@@ -143,6 +190,10 @@ body {
   padding: 4px;
   border: 1px solid #dddddd00;
   overflow-x: auto; /* Если большая картинка шире экрана, внутри окна появится аккуратный нижний скролл */
+  /* ИСПРАВЛЕНИЕ: говорим блоку подстраиваться под контент, а не растягиваться */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Прижимает всё содержимое, включая sub-dropdown, к левому краю и сжимает их */
 }
 
 /* Отключаем клики, наведение и делаем прозрачность 80% */
@@ -152,6 +203,12 @@ body {
   cursor: default;         /* Курсор не будет превращаться в палец при наведении */
 }
 
+/* Отключаем клики, наведение и делаем прозрачность 80% */
+.toggle-img.semi-transparent {
+  opacity: 0.2;            /* Картинка блекнет на 80% */
+  pointer-events: none;    /* Мышка её полностью игнорирует (нельзя нажать) */
+  cursor: default;         /* Курсор не будет превращаться в палец при наведении */
+}
 /* ======================================================== */
 /* СТИЛИ ДЛЯ МОБИЛЬНЫХ ЭКРАНОВ (Ширина меньше 768px)        */
 /* ======================================================== */
@@ -160,8 +217,8 @@ body {
   /* 1. Уменьшаем гигантские отступы всей страницы */
   .matrix-container {
     margin-top: 30px;  /* Вместо 150px делаем аккуратные 30px сверху */
-    margin-left: 10px; /* Прижимаем ближе к левому краю экрана смартфона */
-    margin-right: 10px;/* Добавляем правый отступ, чтобы не прилипало к краю */
+    margin-left: 4px; /* Прижимаем ближе к левому краю экрана смартфона */
+    margin-right: 4px;/* Добавляем правый отступ, чтобы не прилипало к краю */
     gap: 20px;         /* Уменьшаем зазор между рядами */
   }
 
@@ -174,14 +231,18 @@ body {
   }
 
   /* 3. УМЕНЬШАЕМ РАЗМЕР БОЛЬШИХ КАРТИНОК */
-  .static-img, .toggle-img {
+  .toggle-img {
     width: 75px;       /* На смартфонах 120px — это слишком много. Делаем 75px */
     height: auto;
   }
-
+/* 3. УМЕНЬШАЕМ РАЗМЕР БОЛЬШИХ КАРТИНОК */
+  .static-img {
+    width: 22px;       /* иконки носилки линейки поддержка */
+    height: auto;
+  }
   /* 4. Настройка выпадающего окна на телефоне */
   .dropdown-inner {
-    padding: 10px;     /* Уменьшаем внутренние поля, чтобы экономить место */
+    padding: 4px;     /* Уменьшаем внутренние поля, чтобы экономить место */
   }
 
   /* 5. Маленькие картинки 47х40 внутри окон */
